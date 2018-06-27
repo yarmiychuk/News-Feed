@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">News Feed</string>
+    <string name="full_app_name">Ballet News Feed</string>
+
+    <string name="no_news_found">No news was found for this topic.</string>
+    <string name="no_internet_connection">No internet connection.</string>
+    <string name="more">More…</string>
+
+</resources>
