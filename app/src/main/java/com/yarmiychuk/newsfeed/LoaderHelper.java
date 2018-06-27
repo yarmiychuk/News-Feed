@@ -36,6 +36,7 @@ final class LoaderHelper {
     private static final String JSON_TITLE = "webTitle";
     private static final String JSON_TEXT = "trailText";
     private static final String JSON_PUBLICATION_DATE = "webPublicationDate";
+    private static final String JSON_SECTION = "sectionName";
     private static final String JSON_URL = "webUrl";
     private static final String JSON_FIELDS = "fields";
     private static final String JSON_BYLINE = "byline";
@@ -158,6 +159,8 @@ final class LoaderHelper {
                     JSONObject currentNews = newsArray.getJSONObject(i);
                     // Date of publication
                     String date = convertDate(currentNews.getString(JSON_PUBLICATION_DATE));
+                    // Section name
+                    String section = currentNews.getString(JSON_SECTION);
                     // Title
                     String title = currentNews.getString(JSON_TITLE);
                     // Link to publication
@@ -170,7 +173,7 @@ final class LoaderHelper {
                     String author = jsonFields.getString(JSON_BYLINE);
 
                     // Create a new NewsItem object.
-                    NewsItem newsItem = new NewsItem(date, title, description, author, webUrl);
+                    NewsItem newsItem = new NewsItem(date, section, title, description, author, webUrl);
 
                     // Add the new NewsItem to the list of news.
                     news.add(newsItem);

@@ -49,6 +49,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // Get News for current adapter position
         NewsItem currentNews = news.get(position);
+        // Section of publication
+        holder.tvSection.setText(currentNews.getSection());
         // Date of publication
         String date = currentNews.getDate();
         if (date != null) {
@@ -102,12 +104,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardItem;
-        private TextView tvDate, tvTitle, tvDescription, tvAuthor;
+        private TextView tvDate, tvSection, tvTitle, tvDescription, tvAuthor;
 
         private ViewHolder(View view) {
             super(view);
             this.cardItem = view.findViewById(R.id.card_item);
             this.tvDate = view.findViewById(R.id.tv_date);
+            this.tvSection = view.findViewById(R.id.tv_section);
             this.tvTitle = view.findViewById(R.id.tv_title);
             this.tvDescription = view.findViewById(R.id.tv_description);
             this.tvAuthor = view.findViewById(R.id.tv_author);

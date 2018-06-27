@@ -7,11 +7,12 @@ package com.yarmiychuk.newsfeed;
 
 public class NewsItem {
 
-    private String date, title, description, author, webLink;
+    private String date, section, title, description, author, webLink;
 
     // Constructor
-    NewsItem(String date, String title, String description, String author, String webLink) {
+    NewsItem(String date, String section, String title, String description, String author, String webLink) {
         this.date = date;                   // Date of publication
+        this.section = section;             // Section of publication
         this.title = title;                 // Title
         this.description = description;     // Short description
         this.author = author;               // Author
@@ -20,6 +21,10 @@ public class NewsItem {
 
     public String getDate() {
         return date;
+    }
+
+    public String getSection() {
+        return section;
     }
 
     public String getTitle() {

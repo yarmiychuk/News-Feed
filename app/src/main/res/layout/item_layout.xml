@@ -20,11 +20,27 @@
                 android:background="@drawable/title_background"
                 android:padding="@dimen/small_padding">
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    style="@style/ItemTextView.Title"
-                    android:gravity="bottom|end"
-                    tools:text="Date of publication" />
+                <LinearLayout
+                    style="@style/ItemLinearLayout"
+                    android:layout_gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_section"
+                        style="@style/ItemTextView.Title"
+                        android:layout_width="0dp"
+                        android:layout_marginEnd="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1"
+                        tools:text="Section" />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        style="@style/ItemTextView.Title"
+                        android:layout_width="wrap_content"
+                        tools:text="Date of publication" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_title"
