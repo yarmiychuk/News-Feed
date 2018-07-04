@@ -2,18 +2,24 @@ package com.yarmiychuk.newsfeed;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +27,33 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
     private static final int LOADER_ID = 1;
-    private static final String REQUEST_URL = "https://content.guardianapis.com/search?q=ballet&format=json&page-size=50&tag=stage/dance&show-fields=trailText,byline&order-by=newest&api-key=c25750ff-e158-4d63-a537-4754cdbc3769";
+    private static final String MAIN_REQUEST_URL = "https://content.guardianapis.com/search?";
+    private static final String QUERY_REQUEST_KEY = "q";
+    private static final String QUERY_REQUEST_VALUE = "ballet";
+    private static final String QUERY_FORMAT_KEY = "format";
+    private static final String QUERY_FORMAT_VALUE = "json";
+    private static final String QUERY_PAGE_SIZE_KEY = "page-size";
+    private static final String QUERY_TAG_KEY = "tag";
+    private static final String QUERY_TAG_VALUE = "stage/dance";
+    private static final String QUERY_FIELDS_KEY = "show-fields";
+    private static final String QUERY_FIELDS_VALUE = "trailText,byline";
+    private static final String QUERY_ORDER_KEY = "order-by";
+    private static final String QUERY_KEY_KEY = "api-key";
+    private static final String QUERY_KEY_VALUE = "c25750ff-e158-4d63-a537-4754cdbc3769";
 
     private ProgressBar pbLoading;
     private TextView tvInfo;
 
     private NewsAdapter adapter;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Define default Shared Preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Invalidate views
         invalidateViews();
@@ -97,9 +119,48 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public Loader<List<NewsItem>> onCreateLoader(int i, Bundle bundle) {
-        // Create a new loader with special URL
-        return new NewsLoader(this, REQUEST_URL);
+        //Create a new loader with special URL and user's preferences
+        String numbersToDisplay = preferences.getString(
+                getString(R.string.settings_number_to_display_key),
+                getString(R.string.settings_number_to_display_default));
+        String orderBy = preferences.getString(
+                getString(R.string.settings_order_key),
+                getString(R.string.settings_order_default));
+
+        // Prepare request Uri
+        Uri baseUri = Uri.parse(MAIN_REQUEST_URL);
+        // Add parameters to request
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter(QUERY_REQUEST_KEY, QUERY_REQUEST_VALUE);
+        uriBuilder.appendQueryParameter(QUERY_FORMAT_KEY, QUERY_FORMAT_VALUE);
+        uriBuilder.appendQueryParameter(QUERY_PAGE_SIZE_KEY, numbersToDisplay);
+        uriBuilder.appendQueryParameter(QUERY_TAG_KEY, QUERY_TAG_VALUE);
+        uriBuilder.appendQueryParameter(QUERY_FIELDS_KEY, QUERY_FIELDS_VALUE);
+        uriBuilder.appendQueryParameter(QUERY_ORDER_KEY, orderBy);
+        uriBuilder.appendQueryParameter(QUERY_KEY_KEY, QUERY_KEY_VALUE);
+
+        // Return new Loader
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override

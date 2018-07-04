@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
+
+    <ListPreference
+        android:defaultValue="@string/settings_number_to_display_default"
+        android:entries="@array/settings_number_to_display"
+        android:entryValues="@array/settings_number_to_display"
+        android:key="@string/settings_number_to_display_key"
+        android:title="@string/settings_number_to_display_label" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_order_default"
+        android:entries="@array/settings_order_by_labels"
+        android:entryValues="@array/settings_order_by_values"
+        android:key="@string/settings_order_key"
+        android:title="@string/settings_order_label" />
+
+</PreferenceScreen>

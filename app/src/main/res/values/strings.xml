@@ -8,4 +8,28 @@
     <string name="no_internet_connection">No internet connection.</string>
     <string name="more">More…</string>
 
+    <string name="request_param_ballet">ballet</string>
+
+    <!-- Settings -->
+    <string name="settings_title">News Settings</string>
+    <string name="settings_menu_item">Settings</string>
+    <!-- Number of news to display -->
+    <string name="settings_number_to_display_label">Number of news to display</string>
+    <string name="settings_number_to_display_key">number_of_news</string>
+    <string name="settings_number_to_display_10">10</string>
+    <string name="settings_number_to_display_25">25</string>
+    <string name="settings_number_to_display_50">50</string>
+    <string name="settings_number_to_display_100">100</string>
+    <string name="settings_number_to_display_default">@string/settings_number_to_display_25</string>
+    <!-- "Order by" -->
+    <string name="settings_order_label">Order by</string>
+    <string name="settings_order_key">order_by</string>
+    <string name="settings_order_default">@string/settings_order_by_newest_value</string>
+    <!-- Order by newest -->
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value">newest</string>
+    <!-- Order by relevance -->
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value">relevance</string>
+
 </resources>
