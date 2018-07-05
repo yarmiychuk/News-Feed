@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     private static final String QUERY_FIELDS_VALUE = "trailText,byline";
     private static final String QUERY_ORDER_KEY = "order-by";
     private static final String QUERY_KEY_KEY = "api-key";
-    private static final String QUERY_KEY_VALUE = "c25750ff-e158-4d63-a537-4754cdbc3769";
+    private static final String QUERY_KEY_VALUE = "test";
 
     private ProgressBar pbLoading;
     private TextView tvInfo;
